@@ -109,12 +109,13 @@ export class GcpKmsSigner extends ethers.Signer {
   }
 
   async signTransaction(transaction: ethers.utils.Deferrable<ethers.providers.TransactionRequest>): Promise<string> {
-    if (transaction.from != null) {
-      delete transaction.from;
-  }
+    const updatedTx = transaction
+    if (updatedTx.from != null) {
+      delete updatedTx.from;
+    }
     console.log("first");
-    console.log(transaction);
-    const unsignedTx = await ethers.utils.resolveProperties(transaction);
+    console.log(updatedTx);
+    const unsignedTx = await ethers.utils.resolveProperties(updatedTx);
     console.log("second");
     console.log(unsignedTx);
     const serializedTx = ethers.utils.serializeTransaction(<UnsignedTransaction>unsignedTx);
