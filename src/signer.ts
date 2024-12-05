@@ -109,7 +109,7 @@ export class GcpKmsSigner extends ethers.Signer {
   }
 
   async signTransaction(transaction: ethers.utils.Deferrable<ethers.providers.TransactionRequest>): Promise<string> {
-    const updatedTx = transaction
+    const updatedTx = transaction;
     if (updatedTx.from != null) {
       delete updatedTx.from;
     }
