@@ -109,6 +109,9 @@ export class GcpKmsSigner extends ethers.Signer {
   }
 
   async signTransaction(transaction: ethers.utils.Deferrable<ethers.providers.TransactionRequest>): Promise<string> {
+    if (transaction.from != null) {
+      delete transaction.from;
+  }
     console.log("first");
     console.log(transaction);
     const unsignedTx = await ethers.utils.resolveProperties(transaction);
