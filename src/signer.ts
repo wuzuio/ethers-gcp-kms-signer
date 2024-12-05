@@ -109,9 +109,13 @@ export class GcpKmsSigner extends ethers.Signer {
   }
 
   async signTransaction(transaction: ethers.utils.Deferrable<ethers.providers.TransactionRequest>): Promise<string> {
+    console.log(transaction)
     const unsignedTx = await ethers.utils.resolveProperties(transaction);
+    console.log(unsignedTx)
     const serializedTx = ethers.utils.serializeTransaction(<UnsignedTransaction>unsignedTx);
+    console.log(serializedTx)
     const transactionSignature = await this._signDigest(ethers.utils.keccak256(serializedTx));
+    console.log(transactionSignature)
     return ethers.utils.serializeTransaction(<UnsignedTransaction>unsignedTx, transactionSignature);
   }
 
